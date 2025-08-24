@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import MainWeatherWindow from '../../components/MainWeatherWindow';
 import CityInput from '../../components/CityInput';
-import { heroBg } from '../../utils';
+import heroBg from '../../assets/svgs/background.jpg';
 import { useWeatherForecast } from '../../hooks/useWeatherForecast';
 import type { WeatherDay } from '../../types';
 

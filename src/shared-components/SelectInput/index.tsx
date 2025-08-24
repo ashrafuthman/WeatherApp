@@ -2,8 +2,8 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import type { SelectInputOption, SelectInputProps } from './types';
 
 function defaultGetLabel<T extends SelectInputOption>(item: T): string {
-  if (typeof (item as any).name === 'string') return (item as any).name as string;
-  if (typeof (item as any).label === 'string') return (item as any).label as string;
+  if (typeof item.name === 'string') return item.name;
+  if (typeof item.label === 'string') return item.label;
   return String(item);
 }
 

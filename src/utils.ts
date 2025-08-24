@@ -1,11 +1,5 @@
 import { SNAPSHOT_HOUR_24 } from "./constants";
-import heroBg from './assets/svgs/background.jpg';
 import type { WeatherData } from "./types";
-import cities from 'cities-list';
-
-export const cityOptions = Object.keys(cities).map(city => ({
-  name: city,
-}));
 
 export const getDayIndices = (data: WeatherData, targetHour = SNAPSHOT_HOUR_24): number[] => {
   if (!data.list.length) return [];
@@ -36,17 +30,3 @@ export const getDayName = (dateString: string, locale = 'en-US'): string => {
 export const getDayFromDtTxt = (dt_txt: string) => dt_txt.slice(8, 10);
 export const getHourFromDtTxt = (dt_txt: string) => dt_txt.slice(11, 13);
 export const kelvinToC = (k: number) => Math.round(k - 273.15);
-export const iconUrls = import.meta.glob('./assets/svgs/*.svg', {
-  eager: true,
-  as: 'url',
-}) as Record<string, string>;
-
-export const getIconUrl = (iconCode: string): string => {
-  const path = `./assets/svgs/${iconCode}.svg`;
-  const alt1 = `./assets/svgs/${iconCode}.svg`;
-  const fallback = './assets/svgs/01d.svg';
-  return iconUrls[path] || iconUrls[alt1] || iconUrls[fallback];
-};
-
-
-export { heroBg };

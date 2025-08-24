@@ -69,10 +69,10 @@ export const useWeatherForecast = () => {
 
       setError(`Unexpected response code: ${data.cod}`);
       return false;
-    } catch (e: any) {
+    } catch (e: unknown) {
       if (reqId !== reqIdRef.current) return false;
-      if (e?.name === 'AbortError') return false;
-      setError(e?.message || 'Failed to fetch forecast');
+      if (e instanceof DOMException && e.name === 'AbortError') return false;
+      setError(e instanceof Error ? e.message : 'Failed to fetch forecast');
       return false;
     } finally {
       if (reqId === reqIdRef.current) setLoading(false);
