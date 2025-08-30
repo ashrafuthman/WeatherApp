@@ -1,6 +1,6 @@
 # Weather App
 
-Small React + Vite + Tailwind app that shows a 5-day forecast from OpenWeather. City search is debounced; requests are cancellable; cards use skeleton loading. next step to make it mobile friendly. Are you interested to see how I do it? Let us talk and I will do it live
+Small React + Vite + Tailwind app that shows a 5-day forecast from OpenWeather. City search is debounced; requests are cancellable; cards use skeleton loading.
 
 ## Quick Start
 
