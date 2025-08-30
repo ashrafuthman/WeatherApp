@@ -1,14 +1,13 @@
-import React, { lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { lazy, Suspense, useCallback, useEffect, useState } from 'react';
 import MainWeatherWindow from '../../components/MainWeatherWindow';
 import CityInput from '../../components/CityInput';
-import heroBg from '../../assets/svgs/background.jpg';
 import { useWeatherForecast } from '../../hooks/useWeatherForecast';
 import type { WeatherDay } from '../../types';
 
 const WeatherBox = lazy(() => import('../../components/WeatherBox'));
 
 const WeatherLoadingStateBoxes: React.FC = () => (
-  <ul className="flex gap-4 mt-4 py-[40px]">
+  <ul className="flex flex-col md:flex-row gap-4 mt-4 py-[40px]">
     {[...Array(4)].map((_, i) => (
       <li key={i}>
         <WeatherBox loading date="" icon="" temp={0} />
@@ -19,7 +18,7 @@ const WeatherLoadingStateBoxes: React.FC = () => (
 
 const WeatherBoxes: React.FC<{ days: WeatherDay[] }> = ({ days }) => (
   <Suspense fallback={<WeatherLoadingStateBoxes />}>
-    <ul className="flex gap-4 mt-4 py-[40px]">
+    <ul className="flex flex-col md:flex-row gap-4 mt-4 py-[40px]">
       {days.slice(1).map((day, idx) => (
         <li key={idx}>
           <WeatherBox {...day} />
@@ -54,19 +53,15 @@ const Home: React.FC = () => {
     if (query) fetchForecast(query);
   }, [query, fetchForecast]);
 
-  const headerStyle = useMemo(() => ({ backgroundImage: `url(${heroBg})` }), []);
 
   return (
-    <div className="min-h-screen text-center">
-      <header
-        className="min-h-screen flex flex-col items-center justify-center text-[calc(10px+2vmin)] text-white bg-cover bg-no-repeat bg-bottom"
-        style={headerStyle}
-      >
-        <MainWeatherWindow data={days[0]} city={city} country={country}>
-          <CityInput
-            value={query}
-            onChange={setQuery}
-            onSubmit={submitNow}
+    <div className="min-h-screen w-full flex items-center justify-center">
+      <div className="w-full max-w-4xl mx-auto">
+      <MainWeatherWindow data={days[0]} city={city} country={country}>
+        <CityInput
+          value={query}
+          onChange={setQuery}
+          onSubmit={submitNow}
             loading={loading}
           />
             <div>
@@ -76,7 +71,7 @@ const Home: React.FC = () => {
               {loading ? <WeatherLoadingStateBoxes /> : !error && <WeatherBoxes days={days} />}
           </div>
         </MainWeatherWindow>
-      </header>
+      </div>
     </div>
   );
 };
